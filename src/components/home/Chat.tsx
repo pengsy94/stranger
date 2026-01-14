@@ -52,7 +52,7 @@ const Chat = () => {
     }, [])
 
     return (
-        <div className="h-full w-full p-0 md:p-25 ">
+        <div className="h-full w-full md:max-w-5xl p-0 md:pl-0 md:pr-0 md:pt-20 md:pb-20">
             <div className="h-full w-full flex flex-row">
                 <div className="hidden md:inline w-70 mr-5 p-8 rounded-sm bg-white border border-white">
                     <div className="flex justify-center items-center">
