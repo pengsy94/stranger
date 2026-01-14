@@ -1,0 +1,136 @@
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+}
+
+.modal-content-wrapper {
+    position: absolute;
+    background: var(--modal-background-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+/* 桌面端样式 */
+.modal-content-wrapper.desktop {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: 500px;
+    max-width: 90vw;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-content-wrapper.desktop.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* 移动端样式 */
+.modal-content-wrapper.mobile {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(100%);
+    border-radius: 16px 16px 0 0;
+    max-height: 90vh;
+    width: 100%;
+}
+
+.modal-content-wrapper.mobile.active {
+    transform: translateY(0);
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    // border-bottom: 1px solid #eee;
+    flex-shrink: 0;
+}
+
+.modal-title {
+    margin: 0;
+    color: black;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.modal-close-btn {
+    background: none;
+    border: none;
+    font-size: 1.0rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    color: #666;
+    transition: color 0.2s;
+}
+
+.modal-close-btn:hover {
+    color: #333;
+}
+
+.modal-body {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.modal-action-btn {
+    width: 100%;
+    padding: 12px;
+    background: #0070f3;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.modal-action-btn:hover {
+    background: #0051a2;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .modal-body {
+        padding: 16px;
+        max-height: calc(90vh - 120px);
+    }
+
+    .modal-header {
+        padding: 8px 16px;
+    }
+
+    .modal-title {
+        font-size: 1.1rem;
+    }
+}
