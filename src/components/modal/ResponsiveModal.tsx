@@ -79,14 +79,7 @@ const ResponsiveModal = ({ isOpen, onClose, children, title = "Modal Title", hid
 
           {/* 底部按钮 */}
           { footer }
-          {/* <div className={styles["modal-footer"]}>
-            <button
-              className={styles["modal-action-btn"]}
-              onClick={handleClose}
-            >
-              确认
-            </button>
-          </div> */}
+          
         </div>
       </div>
     </div>
