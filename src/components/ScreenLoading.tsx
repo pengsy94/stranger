@@ -65,10 +65,10 @@ const ScreenLoading: React.FC = () => {
 
     return createPortal(
         <div className="fixed inset-0 z-500 flex items-center justify-center bg-black/1 backdrop-blur-sm">
-            <div className="backdrop-blur-md rounded-2xl p-8">
+            <div className="rounded-2xl p-8">
                 <div className="flex flex-col items-center space-y-4">
-                    <div className="w-12 h-12 border-4 border-white border-t-(--button-background) rounded-full animate-spin"></div>
-                    <p className="text-gray-800 text-lg">{config.text}</p>
+                    <div className="w-12 h-12 border-4 border-gray-200 border-t-(--button-background) rounded-full animate-spin"></div>
+                    <p className="text-gray-700 text-lg">{config.text}</p>
                 </div>
             </div>
         </div>,
