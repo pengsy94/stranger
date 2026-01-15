@@ -5,8 +5,12 @@ import { useState } from "react";
 
 import Button from "@/components/ui/CommonButton";
 import SelectFormModal from "@/components/home/SelectFormModal";
+import useAppStore from "@/stores/useAppStore";
 
 const Index = () => {
+
+    const { onlineCount } = useAppStore()
+
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
     return (
@@ -15,7 +19,7 @@ const Index = () => {
                 <Image src={'/next.svg'} alt="logo" style={{ width: '120px', height: '120px' }} width={120} height={120} />
             </div>
             <div className="pt-2 pb-4 text-sm select-none">
-                <span className="text-black">在线: 348 人</span>
+                <span className="text-black">在线: {onlineCount} 人</span>
             </div>
             <div className="pt-2">
                 <Button label="开始遇见" onClick={() => setIsModalOpen(true)} />

@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Roboto } from "next/font/google";
 
-import ViewportHeightProvider from "@/components/ViewportHeightProvider";
+import ViewportHeightProvider from "@/lib/provider/ViewportHeightProvider";
+import SocketProvider from "@/lib/provider/SocketProvider";
+
 import ScreenLoading from '@/components/ScreenLoading';
 
 import "./globals.css";
@@ -19,7 +21,7 @@ export const metadata: Metadata = {
   icons: 'favicon.ico',
   title: "陌路人聊天|匿名聊天 - 匿名聊天交友社区",
   keywords: '匿名聊天,匿名交友,匿名好友,匿名社区,遇见陌生人,陌路人聊天,陌生人社交,陌生人聊天',
-  description: "一个在线认识新朋友的全新服务。当你登录陌路人时，网站随机选取另一个用户和你搭配一对一的聊天。整个对话实在匿名状态下进行的，当然，这并不会限制你向你的陌生人朋友透露你的联系方式以获取进一步的联络。",
+  description: "一个在线认识新朋友的全新服务。随机选取另一个用户和你搭配一对一的聊天。整个对话实在匿名状态下进行的，当然，这并不会限制你向你的陌生人朋友透露你的联系方式以获取进一步的联络。",
 };
 
 export const viewport: Viewport = {
@@ -44,6 +46,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             </div>
           </div>
         </ViewportHeightProvider>
+
+        {/* Socket Provider */}
+        <SocketProvider />
       </body>
     </html>
   );

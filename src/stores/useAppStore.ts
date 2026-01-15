@@ -15,11 +15,13 @@ interface AppState {
         otherMate: ChatConnectOtherMate,
         messageList: MessageItem[]
     }
+    onlineCount: number
 
     // Actions
     updateMateAge: (age: Option) => void
     updateMateSex: (sex: Option) => void
     setConnect: (otherMate: ChatConnectOtherMate, status: boolean) => void
+    setOnlineCount: (count: number) => void
     clearConnect: () => void
     reset: () => void
 }
@@ -39,7 +41,8 @@ const getDefaultInitialState = () => ({
             tag: []
         },
         messageList: []
-    }
+    },
+    onlineCount: 0
 });
 
 const useAppStore = create<AppState>()(
@@ -81,6 +84,9 @@ const useAppStore = create<AppState>()(
                         ]
                     }
                 })),
+                setOnlineCount: (count: number) => set(() => ({
+                    onlineCount: count
+                })),
                 clearConnect: () => set((state) => ({
                     connect: {
                         ...state.connect,
@@ -90,7 +96,7 @@ const useAppStore = create<AppState>()(
                 reset: () => set(getDefaultInitialState()),
             }),
             {
-                name: 'QiaoQiaoStorage', // localStorage 的 key
+                name: 'StrangerStorage', // localStorage 的 key
                 skipHydration: false, // 允许水合时同步数据
                 storage: createJSONStorage(() => {
                     // 在服务端返回一个模拟的存储

@@ -1,8 +1,8 @@
 "use client"
 
+import useAppStore from "@/stores/useAppStore";
 import Index from "@/components/home/Index";
 import Chat from "@/components/home/Chat";
-import useAppStore from "@/stores/useAppStore";
 
 export default function Home() {
 
