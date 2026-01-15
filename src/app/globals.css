@@ -64,3 +64,30 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer utilities {
+  .thin-scrollbar {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #c1c1c1 #f1f1f1; /* Firefox */
+  }
+  
+  /* Chrome, Safari, Edge */
+  .thin-scrollbar::-webkit-scrollbar {
+    width: 6px; /* 更细的宽度 */
+    height: 6px; /* 水平滚动条高度 */
+  }
+  
+  .thin-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+  
+  .thin-scrollbar::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 10px;
+  }
+  
+  .thin-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1;
+  }
+}
