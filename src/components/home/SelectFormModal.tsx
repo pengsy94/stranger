@@ -9,6 +9,8 @@ import { Option } from "@/types/option";
 import useAppStore from "@/stores/useAppStore";
 
 import { loading } from '@/components/ScreenLoading';
+import { eventEmitter } from "@/lib/event";
+import mockApi from "@/lib/mock";
 
 interface SelectFormProps {
     mate: {
@@ -56,7 +58,7 @@ const AgeSelectForm = (props: SelectFormProps) => {
                     return (
                         <div
                             key={index}
-                            className={`select-none p-2 border ${selected}`}
+                            className={`select-none p-2 border cursor-pointer ${selected}`}
                             onClick={() => props.saveOptions(item)}
                         >
                             {item.label}
@@ -68,14 +70,6 @@ const AgeSelectForm = (props: SelectFormProps) => {
     );
 }
 
-// 模拟 API 函数
-const mockApi = {
-    async fetchUserData(userId: number): Promise<{ id: number; name: string }> {
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        return { id: userId, name: `用户${userId}` };
-    },
-};
-
 const SelectFormModal = ({ isOpen = false, onClose = () => { } }: IProps) => {
 
     const { mate, updateMateAge, updateMateSex } = useAppStore();
@@ -84,8 +78,10 @@ const SelectFormModal = ({ isOpen = false, onClose = () => { } }: IProps) => {
         // 显示加载
         loading.show('正在遇见...');
 
-        const data = await mockApi.fetchUserData(1);
-        console.log(data)
+        // 执行发送
+        eventEmitter.emit('meet', { type: 'xxxxssss' })
+
+        await mockApi.fetchUserData(1);
 
         // 隐藏加载
         loading.hide();
