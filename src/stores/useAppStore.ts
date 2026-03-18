@@ -12,6 +12,8 @@ interface AppState {
     }
     connect: {
         status: boolean,
+        depart: boolean,
+        depart_message?: string,
         otherMate: ChatConnectOtherMate,
         messageList: MessageItem[]
     }
@@ -22,6 +24,8 @@ interface AppState {
     updateMateSex: (sex: Option) => void
     setConnect: (otherMate: ChatConnectOtherMate, status: boolean) => void
     setOnlineCount: (count: number) => void
+    setMessageList: (messages: MessageItem[]) => void
+    setConnectDepart: (depart: boolean, message?: string) => void
     clearConnect: () => void
     reset: () => void
 }
@@ -34,7 +38,10 @@ const getDefaultInitialState = () => ({
     },
     connect: {
         status: false,
+        depart: false,
+        depart_message: '你已与对方说再见，会话被终止...',
         otherMate: {
+            to: '',
             age: { label: '', value: 0 },
             sex: { label: '', value: 0 },
             location: '',
@@ -59,29 +66,22 @@ const useAppStore = create<AppState>()(
                 setConnect: (otherMate: ChatConnectOtherMate, status: boolean) => set(() => ({
                     connect: {
                         status,
+                        depart: true,
                         otherMate,
-                        messageList: [
-                            { sender: 2, type: 1, text: 'hello', createdAt: new Date() },
-                            { sender: 1, type: 1, text: '你也hello', createdAt: new Date() },
-                            { sender: 2, type: 1, text: 'hello', createdAt: new Date() },
-                            { sender: 1, type: 1, text: 'hello', createdAt: new Date() },
-                            { sender: 2, type: 1, text: 'hello', createdAt: new Date() },
-                            { sender: 1, type: 1, text: 'hello', createdAt: new Date() },
-                            { sender: 2, type: 1, text: 'hello', createdAt: new Date() },
-                            { sender: 1, type: 1, text: 'hello', createdAt: new Date() },
-                            { sender: 2, type: 1, text: 'hello', createdAt: new Date() },
-                            { sender: 1, type: 1, text: 'hello', createdAt: new Date() },
-                            { sender: 2, type: 1, text: 'hello', createdAt: new Date() },
-                            { sender: 1, type: 1, text: 'hello', createdAt: new Date() },
-                            { sender: 2, type: 1, text: 'hello', createdAt: new Date() },
-                            { sender: 1, type: 1, text: 'hello', createdAt: new Date() },
-                            { sender: 2, type: 1, text: 'hello', createdAt: new Date() },
-                            { sender: 1, type: 1, text: 'hello', createdAt: new Date() },
-                            { sender: 2, type: 1, text: 'hello', createdAt: new Date() },
-                            { sender: 1, type: 1, text: 'hello', createdAt: new Date() },
-                            { sender: 2, type: 1, text: 'hello', createdAt: new Date() },
-                            { sender: 1, type: 1, text: 'hello', createdAt: new Date() },
-                        ]
+                        messageList: []
+                    }
+                })),
+                setMessageList: (messages: MessageItem[]) => set((state) => ({
+                    connect: {
+                        ...state.connect,
+                        messageList: messages
+                    }
+                })),
+                setConnectDepart: (depart: boolean, message?: string) => set((state) => ({
+                    connect: {
+                        ...state.connect,
+                        depart,
+                        depart_message: message || state.connect.depart_message,
                     }
                 })),
                 setOnlineCount: (count: number) => set(() => ({
@@ -109,10 +109,13 @@ const useAppStore = create<AppState>()(
                     }
                     return localStorage
                 }),
-                // 可选：只持久化部分状态
+                // 可选：只持久化部分状态 - 排除消息列表以避免localStorage容量问题
                 partialize: (state) => ({
                     mate: state.mate,
-                    connect: state.connect,
+                    connect: {
+                        ...state.connect,
+                        messageList: [], // 不持久化消息列表，避免localStorage容量限制
+                    },
                 }),
             }
         )

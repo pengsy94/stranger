@@ -5,6 +5,8 @@ import ViewportHeightProvider from "@/lib/provider/ViewportHeightProvider";
 import SocketProvider from "@/lib/provider/SocketProvider";
 
 import ScreenLoading from '@/components/ScreenLoading';
+import Message from '@/components/Message';
+import Modal from '@/components/Modal';
 
 import "./globals.css";
 
@@ -27,6 +29,9 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1.0,
+  maximumScale: 1.0,
+  userScalable: false,
+  minimumScale: 1.0,
   viewportFit: 'cover',
 };
 
@@ -35,6 +40,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="zh-CN">
       <body className={roboto.variable}>
         <ScreenLoading />
+        <Message />
+        <Modal />
 
         {/* 🔴 引入客户端组件处理视口高度 */}
         <ViewportHeightProvider>

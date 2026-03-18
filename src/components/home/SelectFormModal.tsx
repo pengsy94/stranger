@@ -8,9 +8,8 @@ import { ageOptions, sexOptions } from "@/lib/data";
 import { Option } from "@/types/option";
 import useAppStore from "@/stores/useAppStore";
 
-import { loading } from '@/components/ScreenLoading';
 import { eventEmitter } from "@/lib/event";
-import mockApi from "@/lib/mock";
+import { getAppKey } from "@/utils/key";
 
 interface SelectFormProps {
     mate: {
@@ -75,16 +74,17 @@ const SelectFormModal = ({ isOpen = false, onClose = () => { } }: IProps) => {
     const { mate, updateMateAge, updateMateSex } = useAppStore();
 
     const handleMeet = async () => {
-        // 显示加载
-        loading.show('正在遇见...');
+        // 收集并打印年龄、性别等信息
+        const userInfo = {
+            type: 'meet',
+            user_key: getAppKey(),
+            age_index: mate.age.value,
+            sex_index: mate.sex.value,
+            location: '银河系,太阳系,地球',
+        };
 
         // 执行发送
-        eventEmitter.emit('meet', { type: 'xxxxssss' })
-
-        await mockApi.fetchUserData(1);
-
-        // 隐藏加载
-        loading.hide();
+        eventEmitter.emit('meet', userInfo)
     }
 
     return (

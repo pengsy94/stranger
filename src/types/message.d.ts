@@ -10,9 +10,13 @@ export interface MessageItem {
     image?: string
 
     createdAt: Date
+    // 即阅即焚相关属性
+    burnAfterRead?: boolean
+    isViewed?: boolean
 }
 
 export interface ChatConnectOtherMate {
+    to: string,
     age: Option,
     sex: Option,
     location: string,
