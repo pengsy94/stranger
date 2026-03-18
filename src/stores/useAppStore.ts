@@ -112,10 +112,7 @@ const useAppStore = create<AppState>()(
                 // 可选：只持久化部分状态 - 排除消息列表以避免localStorage容量问题
                 partialize: (state) => ({
                     mate: state.mate,
-                    connect: {
-                        ...state.connect,
-                        messageList: [], // 不持久化消息列表，避免localStorage容量限制
-                    },
+                    connect: state.connect,
                 }),
             }
         )

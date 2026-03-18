@@ -72,12 +72,12 @@ const SocketProvider = () => {
                 case 'private':
                     // 私聊操作 成功
                     let content: MessageItem;
-                    
+
                     // 处理接收的消息
                     const receivedMessage = message.data.message;
-                    
+
                     // 检查是否为图片消息
-                    if (typeof receivedMessage === 'object' && receivedMessage !== null && 'type' in receivedMessage) {
+                    if (typeof receivedMessage === 'object' && receivedMessage !== null && 'type' in receivedMessage && receivedMessage.type === 2) {
                         // 图片消息（即阅即焚）
                         content = {
                             sender: 2,
@@ -92,11 +92,11 @@ const SocketProvider = () => {
                         content = {
                             sender: 2,
                             type: 1,
-                            text: receivedMessage || '',
+                            text: receivedMessage.text || '',
                             createdAt: new Date()
                         };
                     }
-                    
+
                     // 添加对方的信息数据
                     setMessageList([...connect.messageList, content]);
                     break;

@@ -107,7 +107,7 @@ const Chat = () => {
     };
 
     const handleSendMessage = () => {
-        if (connect.depart) {
+        if (!connect.depart) {
             return;
         }
 
@@ -120,17 +120,23 @@ const Chat = () => {
             sender: 1,
             type: 1,
             text: content,
+            burnAfterRead: true,
+            isViewed: false,
             createdAt: new Date()
         };
         setMessageList([...connect.messageList, message]);
 
-        setContent('');
-
         eventEmitter.emit('meet', {
             type: 'private',
             to: connect?.otherMate.to || '',
-            message: content
+            message: {
+                text: content,
+                type: 1,
+                burnAfterRead: true
+            }
         });
+
+        setContent('');
     };
 
     const handleDepart = () => {
