@@ -140,7 +140,7 @@ TypeScript 类型检查已集成到构建流程中。
 
 ## 📄 许可证
 
-MIT License
+[MIT](LICENSE)
 
 ## 📞 联系方式
 
