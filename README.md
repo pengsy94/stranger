@@ -2,6 +2,8 @@
 
 一个基于 Next.js 构建的现代化匿名随机聊天应用，支持实时消息交流、图片分享和即阅即焚等功能。
 
+API接口：[https://github.com/pengsy94/stranger-api](https://github.com/pengsy94/stranger-api)
+
 ## ✨ 功能特点
 
 ### 核心功能
